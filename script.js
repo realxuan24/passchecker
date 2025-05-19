@@ -1,0 +1,121 @@
+function pickRandom(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+function checkEasterEggs(password) {
+  const lower = password.toLowerCase();
+  const birthdayRegex = /^(0[1-9]|1[0-2])[0-3][0-9](19|20)\d{2}$|^(19|20)\d{2}(0[1-9]|1[0-2])[0-3][0-9]$/;
+
+  const commonPasswords = [
+    "123456", "password", "12345678", "qwerty", "abc123",
+    "111111", "123123", "admin", "letmein", "welcome",
+    "iloveyou", "passw0rd", "monkey", "dragon"
+  ];
+
+  if (birthdayRegex.test(password)) {
+    return pickRandom([
+      "🎂 Using your birthday? Might as well hand out your password at your party.",
+      "📅 Classic birthday password — and a hacker’s favorite too.",
+      "🧠 Remembering is easy, but so is guessing this.",
+      "🎉 Birthday detected – classic ahhh password 😂",
+      "😏 You really trust the honor system, huh?"
+    ]);
+  }
+
+  if (commonPasswords.includes(lower)) {
+    if (lower.includes("password")) {
+      return pickRandom([
+        "🔐 'password' is not a password. It's a confession.",
+        "🙄 The oldest trick in the book — and still a bad one.",
+        "🤯 Did you just use 'password'? We're speechless.",
+        "🚫 You just unlocked the vault of worst passwords ever.",
+        "😬 Even your dog could hack that."
+      ]);
+    }
+
+    if (/^\d+$/.test(password)) {
+      return pickRandom([
+        `🤔 Wow. You used '${password}'? Come on, try harder!`,
+        "🔢 Your password's got the complexity of a ruler.",
+        "🙃 It's not even trying to pretend it's secure.",
+        "📉 Even kindergarteners use stronger passwords.",
+        "🧃 Smooth brain detected. Try mixing things up."
+      ]);
+    }
+
+    if (["admin", "letmein", "welcome"].includes(lower)) {
+      return pickRandom([
+        "🧟‍♂️ Are you trying to welcome hackers?",
+        "🚪 'letmein'? You just did.",
+        "👮‍♂️ 'admin'... You wish.",
+        "🔓 Might as well leave the door wide open."
+      ]);
+    }
+
+    if (lower.includes("love") || lower === "iloveyou") {
+      return pickRandom([
+        "💔 Love won't save you from brute force attacks.",
+        "❤️ That's sweet... and utterly unsafe.",
+        "💕 You’re sharing way too much with the internet."
+      ]);
+    }
+
+    return `🤔 Wow. You used '${password}'? Come on, try harder!`;
+  }
+
+  return "";
+}
+
+function checkPasswordStrength(password) {
+  let strength = 0;
+
+  const feedback = [];
+
+  if (password.length >= 8) strength++;
+  else feedback.push("Too short");
+
+  if (/[A-Z]/.test(password)) strength++;
+  else feedback.push("Add uppercase letters");
+
+  if (/[a-z]/.test(password)) strength++;
+  else feedback.push("Add lowercase letters");
+
+  if (/[0-9]/.test(password)) strength++;
+  else feedback.push("Add numbers");
+
+  if (/[^A-Za-z0-9]/.test(password)) strength++;
+  else feedback.push("Add symbols");
+
+  let strengthLabel = '';
+  let color = '';
+
+  if (strength <= 1) {
+    strengthLabel = 'Very Weak';
+    color = 'red';
+  } else if (strength === 2) {
+    strengthLabel = 'Weak';
+    color = 'orangered';
+  } else if (strength === 3) {
+    strengthLabel = 'Moderate';
+    color = 'orange';
+  } else if (strength === 4) {
+    strengthLabel = 'Strong';
+    color = 'blue';
+  } else {
+    strengthLabel = 'Very Strong';
+    color = 'green';
+  }
+
+  const easterEggMessage = checkEasterEggs(password);
+
+  document.getElementById("strength-text").textContent = strengthLabel;
+  document.getElementById("strength-text").style.color = color;
+  document.getElementById("feedback").textContent = feedback.join(', ');
+  document.getElementById("easter-egg").textContent = easterEggMessage;
+}
+
+// Hook into the input
+document.getElementById("password").addEventListener("input", function () {
+  checkPasswordStrength(this.value);
+});
+
