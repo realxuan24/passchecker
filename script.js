@@ -4,7 +4,7 @@ function pickRandom(array) {
 
 function checkEasterEggs(password) {
   const lower = password.toLowerCase();
-  const birthdayRegex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(19|20)\d{2}$|^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
+  const birthdayRegex = /^(0[1-9]|1[0-2])[0-3][0-9](19|20)\d{2}$|^(19|20)\d{2}(0[1-9]|1[0-2])[0-3][0-9]$/;
 
   const commonPasswords = [
     "123456", "password", "12345678", "qwerty", "abc123",
@@ -66,7 +66,7 @@ function checkEasterEggs(password) {
   return "";
 }
 
-function checkPasswordStrength(password) {
+  function checkPasswordStrength(password) {
   let strength = 0;
   const feedback = [];
 
@@ -112,25 +112,25 @@ function checkPasswordStrength(password) {
     color = 'limegreen';
   }
 
-  // Update DOM
+  // DOM updates
   document.getElementById("strength-text").textContent = strengthLabel;
   document.getElementById("strength-text").style.color = color;
   document.getElementById("feedback").textContent = feedback.join(', ');
 
+  // Update requirement list visually
   document.getElementById("req-length").className = lengthValid ? "valid" : "invalid";
   document.getElementById("req-upper").className = upperValid ? "valid" : "invalid";
   document.getElementById("req-lower").className = lowerValid ? "valid" : "invalid";
   document.getElementById("req-number").className = numberValid ? "valid" : "invalid";
   document.getElementById("req-symbol").className = symbolValid ? "valid" : "invalid";
 
+  // Easter egg message
   const easterEggMessage = checkEasterEggs(password);
   document.getElementById("easter-egg").textContent = easterEggMessage;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("password").addEventListener("input", function () {
-    checkPasswordStrength(this.value);
-  });
+// Hook into the input
+document.getElementById("password").addEventListener("input", function () {
+  checkPasswordStrength(this.value);
 });
-
 
