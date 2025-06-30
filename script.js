@@ -4,7 +4,7 @@ function pickRandom(array) {
 
 function checkEasterEggs(password) {
   const lower = password.toLowerCase();
-  const birthdayRegex = /^(0[1-9]|1[0-2])[0-3][0-9](19|20)\d{2}$|^(19|20)\d{2}(0[1-9]|1[0-2])[0-3][0-9]$/;
+  const birthdayRegex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(19|20)\d{2}$|^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
 
   const commonPasswords = [
     "123456", "password", "12345678", "qwerty", "abc123",
@@ -67,7 +67,6 @@ function checkEasterEggs(password) {
 }
 
 function checkPasswordStrength(password) {
-  function checkPasswordStrength(password) {
   let strength = 0;
   const feedback = [];
 
@@ -113,73 +112,25 @@ function checkPasswordStrength(password) {
     color = 'limegreen';
   }
 
-  // DOM updates
+  // Update DOM
   document.getElementById("strength-text").textContent = strengthLabel;
   document.getElementById("strength-text").style.color = color;
   document.getElementById("feedback").textContent = feedback.join(', ');
 
-  // Update requirement list visually
   document.getElementById("req-length").className = lengthValid ? "valid" : "invalid";
   document.getElementById("req-upper").className = upperValid ? "valid" : "invalid";
   document.getElementById("req-lower").className = lowerValid ? "valid" : "invalid";
   document.getElementById("req-number").className = numberValid ? "valid" : "invalid";
   document.getElementById("req-symbol").className = symbolValid ? "valid" : "invalid";
 
-  // Easter egg message
   const easterEggMessage = checkEasterEggs(password);
   document.getElementById("easter-egg").textContent = easterEggMessage;
 }
 
-
-// Hook into the input
-document.getElementById("password").addEventListener("input", function () {
-  checkPasswordStrength(this.value);
-});
-
-  const themes = [
-  {
-    name: "dark",
-    bg: "linear-gradient(135deg, #0f172a, #1e293b)",
-    card: "#1e293b",
-    text: "#f1f5f9",
-    accent: "#facc15"
-  },
-  {
-    name: "light",
-    bg: "#f1f5f9",
-    card: "#ffffff",
-    text: "#1e293b",
-    accent: "#0f172a"
-  },
-  {
-    name: "blue",
-    bg: "linear-gradient(135deg, #1e3a8a, #3b82f6)",
-    card: "#1e40af",
-    text: "#f1f5f9",
-    accent: "#93c5fd"
-  },
-  {
-    name: "purple",
-    bg: "linear-gradient(135deg, #581c87, #9333ea)",
-    card: "#6b21a8",
-    text: "#fdf4ff",
-    accent: "#fbcfe8"
-  }
-];
-
-let currentTheme = 0;
-
-document.getElementById("theme-toggle").addEventListener("click", () => {
-  currentTheme = (currentTheme + 1) % themes.length;
-  const theme = themes[currentTheme];
-  
-  document.body.style.background = theme.bg;
-  document.body.style.color = theme.text;
-
-  const card = document.querySelector(".card") || document.querySelector(".container");
-  if (card) card.style.backgroundColor = theme.card;
-
-  document.querySelector("h1").style.color = theme.accent;
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("password").addEventListener("input", function () {
+    checkPasswordStrength(this.value);
+  });
 });
 
 
