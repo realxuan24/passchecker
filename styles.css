@@ -1,55 +1,99 @@
+/* RESET + BASE STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f0f2f5;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 1rem;
+  color: #f1f5f9;
 }
 
-.container {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 350px;
+/* CARD CONTAINER */
+.container, .card {
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 400px;
 }
 
+/* HEADERS + LABEL */
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: #facc15;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* INPUT STYLES */
 input[type="password"] {
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: #334155;
+  color: #f8fafc;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+/* STRENGTH LABEL */
+#strength-text {
+  font-weight: 600;
 }
 
 #strength {
-  font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
-#result {
-  color: #888;
+#feedback {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  color: #cbd5e1;
+}
+
+/* REQUIREMENTS */
+ul.requirements {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
 }
 
 .requirements li {
-  list-style: none;
-  padding: 4px 0;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
 }
 
 .requirements li.valid {
-  color: green;
+  color: #22c55e;
 }
 
 .requirements li.invalid {
-  color: red;
+  color: #ef4444;
 }
 
 .easter-egg {
   font-style: italic;
-  color: #c0392b;
-  margin-top: 10px;
-  height: 1.2em;
+  color: #f87171;
+  margin-top: 0.5rem;
+  min-height: 1.2rem;
 }
-
