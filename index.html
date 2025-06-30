@@ -30,9 +30,6 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
       max-width: 400px;
       width: 100%;
-      <button id="theme-toggle" style="margin-bottom: 1rem;">
-  🎨 Switch Theme
-</button>
     }
 
     h1 {
@@ -103,10 +100,29 @@
       margin-top: 0.5rem;
       min-height: 1.2rem;
     }
+
+    #theme-toggle {
+      margin-bottom: 1rem;
+      background-color: #facc15;
+      border: none;
+      border-radius: 0.5rem;
+      color: #1e293b;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    #theme-toggle:hover {
+      background-color: #eab308;
+    }
   </style>
 </head>
 <body>
   <div class="card">
+    <button id="theme-toggle">🎨 Switch Theme</button>
+
     <h1>🔒 Password Strength Checker</h1>
     <label for="password">Enter your password:</label>
     <input type="password" id="password" placeholder="Type something strong..." />
@@ -122,10 +138,9 @@
       <li class="invalid" id="req-symbol">Symbol</li>
     </ul>
 
-    <div id="easter-egg" class="easter-egg"></div>
+    <div id="easter-egg" class="easter-egg" aria-live="polite"></div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
