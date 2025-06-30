@@ -67,25 +67,32 @@ function checkEasterEggs(password) {
 }
 
 function checkPasswordStrength(password) {
+  function checkPasswordStrength(password) {
   let strength = 0;
-
   const feedback = [];
 
-  if (password.length >= 8) strength++;
+  const lengthValid = password.length >= 8;
+  const upperValid = /[A-Z]/.test(password);
+  const lowerValid = /[a-z]/.test(password);
+  const numberValid = /[0-9]/.test(password);
+  const symbolValid = /[^A-Za-z0-9]/.test(password);
+
+  if (lengthValid) strength++;
   else feedback.push("Too short");
 
-  if (/[A-Z]/.test(password)) strength++;
+  if (upperValid) strength++;
   else feedback.push("Add uppercase letters");
 
-  if (/[a-z]/.test(password)) strength++;
+  if (lowerValid) strength++;
   else feedback.push("Add lowercase letters");
 
-  if (/[0-9]/.test(password)) strength++;
+  if (numberValid) strength++;
   else feedback.push("Add numbers");
 
-  if (/[^A-Za-z0-9]/.test(password)) strength++;
+  if (symbolValid) strength++;
   else feedback.push("Add symbols");
 
+  // Strength label + color
   let strengthLabel = '';
   let color = '';
 
@@ -103,16 +110,26 @@ function checkPasswordStrength(password) {
     color = 'blue';
   } else {
     strengthLabel = 'Very Strong';
-    color = 'green';
+    color = 'limegreen';
   }
 
-  const easterEggMessage = checkEasterEggs(password);
-
+  // DOM updates
   document.getElementById("strength-text").textContent = strengthLabel;
   document.getElementById("strength-text").style.color = color;
   document.getElementById("feedback").textContent = feedback.join(', ');
+
+  // Update requirement list visually
+  document.getElementById("req-length").className = lengthValid ? "valid" : "invalid";
+  document.getElementById("req-upper").className = upperValid ? "valid" : "invalid";
+  document.getElementById("req-lower").className = lowerValid ? "valid" : "invalid";
+  document.getElementById("req-number").className = numberValid ? "valid" : "invalid";
+  document.getElementById("req-symbol").className = symbolValid ? "valid" : "invalid";
+
+  // Easter egg message
+  const easterEggMessage = checkEasterEggs(password);
   document.getElementById("easter-egg").textContent = easterEggMessage;
 }
+
 
 // Hook into the input
 document.getElementById("password").addEventListener("input", function () {
