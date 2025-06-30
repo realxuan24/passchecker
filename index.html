@@ -1,26 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Password Strength Checker</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #111827;
+    }
+
+    #strength-text {
+      font-size: 1.1rem;
+    }
+
+    #feedback {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    ul.requirements {
+      margin-top: 15px;
+      padding-left: 20px;
+    }
+
+    ul.requirements li::before {
+      content: '• ';
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h2>Password Strength Checker</h2>
-    <input type="password" id="password" placeholder="Enter password" />
-    <div id="strength-text"></div>
-    <div id="feedback" style="font-size: 0.9em; color: gray;"></div>
-    <div id="easter-egg" style="margin-top: 10px; color: #aa00aa; font-style: italic;"></div>
+    <h1>Password Checker 🔒</h1>
+    <label for="password"><strong>Enter your password:</strong></label>
+    <input type="password" id="password" placeholder="Make it strong..." />
+
+    <div id="strength">
+      Strength: <span id="strength-text">—</span>
+    </div>
+    <div id="feedback"></div>
+
     <ul class="requirements">
-      <li id="length">✔ At least 8 characters</li>
-      <li id="uppercase">✔ At least one uppercase letter</li>
-      <li id="lowercase">✔ At least one lowercase letter</li>
-      <li id="number">✔ At least one number</li>
-      <li id="special">✔ At least one special character</li>
+      <li class="invalid">At least 8 characters</li>
+      <li class="invalid">Contains uppercase letters</li>
+      <li class="invalid">Contains lowercase letters</li>
+      <li class="invalid">Contains numbers</li>
+      <li class="invalid">Contains symbols</li>
     </ul>
-    <p id="easter-egg" class="easter-egg"></p>
+
+    <div id="easter-egg" class="easter-egg"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
