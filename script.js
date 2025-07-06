@@ -94,6 +94,7 @@ function checkPasswordStrength(password) {
   const strengthText = document.getElementById("strength-text");
   const barFill = document.getElementById("bar-fill");
   const feedbackBox = document.getElementById("feedback");
+  const inputField = document.getElementById("password");
 
   const barWidths = ["10%", "25%", "50%", "75%", "100%"];
   const strengthLabels = ["Very Weak", "Weak", "Moderate", "Strong", "Very Strong"];
@@ -103,6 +104,7 @@ function checkPasswordStrength(password) {
   strengthText.style.color = strengthColors[strength - 1] || "red";
   barFill.style.width = barWidths[strength - 1] || "10%";
   barFill.style.backgroundColor = strengthColors[strength - 1] || "red";
+  barFill.style.boxShadow = `0 0 8px ${barFill.style.backgroundColor}`;
 
   feedbackBox.textContent = feedback.join(", ");
 
@@ -113,6 +115,12 @@ function checkPasswordStrength(password) {
   document.getElementById("req-symbol").className = symbolValid ? "valid" : "invalid";
 
   document.getElementById("easter-egg").textContent = checkEasterEggs(password);
+
+  if (strength <= 1) {
+    inputField.classList.add("weak");
+  } else {
+    inputField.classList.remove("weak");
+  }
 }
 
 document.getElementById("password").addEventListener("input", function () {
@@ -132,4 +140,10 @@ document.getElementById("copy-btn").addEventListener("click", function () {
   navigator.clipboard.writeText(input.value).then(() => {
     alert("Password copied to clipboard!");
   });
+});
+
+// Theme toggle
+const themeSwitch = document.getElementById("theme-switch");
+themeSwitch.addEventListener("change", () => {
+  document.body.classList.toggle("light-theme");
 });
