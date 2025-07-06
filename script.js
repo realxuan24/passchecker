@@ -115,12 +115,10 @@ function checkPasswordStrength(password) {
   document.getElementById("easter-egg").textContent = checkEasterEggs(password);
 }
 
-// Password input listener
 document.getElementById("password").addEventListener("input", function () {
   checkPasswordStrength(this.value);
 });
 
-// Toggle visibility
 document.getElementById("toggle-password").addEventListener("click", function () {
   const input = document.getElementById("password");
   const type = input.type === "password" ? "text" : "password";
@@ -128,7 +126,6 @@ document.getElementById("toggle-password").addEventListener("click", function ()
   this.textContent = type === "password" ? "👁️" : "🙈";
 });
 
-// Copy password
 document.getElementById("copy-btn").addEventListener("click", function () {
   const input = document.getElementById("password");
   if (!input.value) return alert("Nothing to copy!");
