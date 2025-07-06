@@ -123,12 +123,17 @@ function checkPasswordStrength(password) {
   }
 }
 
-// Wait for DOM content to load
 document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("password");
   const togglePassword = document.getElementById("toggle-password");
   const copyBtn = document.getElementById("copy-btn");
   const themeSwitch = document.getElementById("theme-switch");
+  const music = document.getElementById("bg-music");
+
+  // Volume control
+  if (music) {
+    music.volume = 0.5;
+  }
 
   passwordInput.addEventListener("input", function () {
     checkPasswordStrength(this.value);
@@ -147,15 +152,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Load saved theme
   if (localStorage.getItem("theme") === "light") {
     document.body.classList.add("light-theme");
     themeSwitch.checked = true;
   }
 
-  // Toggle theme
   themeSwitch.addEventListener("change", () => {
     document.body.classList.toggle("light-theme");
     localStorage.setItem("theme", themeSwitch.checked ? "light" : "dark");
   });
+
+  // Ensure music plays after user interaction (for browsers that block autoplay)
+  document.addEventListener("click", () => {
+    if (music && music.paused) {
+      music.play().catch(() => {});
+    }
+  }, { once: true });
 });
