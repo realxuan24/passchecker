@@ -17,7 +17,7 @@ body {
 }
 
 /* CARD CONTAINER */
-.container, .card {
+.card {
   background: #1e293b;
   padding: 2rem;
   border-radius: 1rem;
@@ -40,10 +40,14 @@ label {
   margin-bottom: 0.5rem;
 }
 
-/* INPUT STYLES */
-input[type="password"] {
+/* INPUT + TOGGLE */
+.password-wrapper {
+  position: relative;
+}
+
+#password {
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.8rem 1rem;
   margin-bottom: 1rem;
   border: none;
   border-radius: 0.5rem;
@@ -56,7 +60,36 @@ input::placeholder {
   color: #94a3b8;
 }
 
-/* STRENGTH LABEL */
+#toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* STRENGTH BAR */
+#strength-bar {
+  height: 6px;
+  width: 100%;
+  background-color: #334155;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+#bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: red;
+  transition: width 0.3s;
+}
+
+/* STRENGTH TEXT + FEEDBACK */
 #strength-text {
   font-weight: 600;
 }
@@ -91,9 +124,27 @@ ul.requirements {
   color: #ef4444;
 }
 
+/* EASTER EGG */
 .easter-egg {
   font-style: italic;
   color: #f87171;
   margin-top: 0.5rem;
   min-height: 1.2rem;
+}
+
+/* COPY BUTTON */
+#copy-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+#copy-btn:hover {
+  background-color: #2563eb;
 }
