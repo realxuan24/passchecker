@@ -123,27 +123,39 @@ function checkPasswordStrength(password) {
   }
 }
 
-document.getElementById("password").addEventListener("input", function () {
-  checkPasswordStrength(this.value);
-});
+// Wait for DOM content to load
+document.addEventListener("DOMContentLoaded", () => {
+  const passwordInput = document.getElementById("password");
+  const togglePassword = document.getElementById("toggle-password");
+  const copyBtn = document.getElementById("copy-btn");
+  const themeSwitch = document.getElementById("theme-switch");
 
-document.getElementById("toggle-password").addEventListener("click", function () {
-  const input = document.getElementById("password");
-  const type = input.type === "password" ? "text" : "password";
-  input.type = type;
-  this.textContent = type === "password" ? "👁️" : "🙈";
-});
-
-document.getElementById("copy-btn").addEventListener("click", function () {
-  const input = document.getElementById("password");
-  if (!input.value) return alert("Nothing to copy!");
-  navigator.clipboard.writeText(input.value).then(() => {
-    alert("Password copied to clipboard!");
+  passwordInput.addEventListener("input", function () {
+    checkPasswordStrength(this.value);
   });
-});
 
-// Theme toggle
-const themeSwitch = document.getElementById("theme-switch");
-themeSwitch.addEventListener("change", () => {
-  document.body.classList.toggle("light-theme");
+  togglePassword.addEventListener("click", function () {
+    const type = passwordInput.type === "password" ? "text" : "password";
+    passwordInput.type = type;
+    this.textContent = type === "password" ? "👁️" : "🙈";
+  });
+
+  copyBtn.addEventListener("click", function () {
+    if (!passwordInput.value) return alert("Nothing to copy!");
+    navigator.clipboard.writeText(passwordInput.value).then(() => {
+      alert("Password copied to clipboard!");
+    });
+  });
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "light") {
+    document.body.classList.add("light-theme");
+    themeSwitch.checked = true;
+  }
+
+  // Toggle theme
+  themeSwitch.addEventListener("change", () => {
+    document.body.classList.toggle("light-theme");
+    localStorage.setItem("theme", themeSwitch.checked ? "light" : "dark");
+  });
 });
