@@ -5,121 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔥 Password Strength Checker</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #f1f5f9;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .card {
-      background-color: #1e293b;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      max-width: 400px;
-      width: 100%;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
-      text-align: center;
-      color: #facc15;
-    }
-
-    label {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    input[type="password"] {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      margin-top: 0.3rem;
-      background-color: #334155;
-      color: #f8fafc;
-      margin-bottom: 1rem;
-    }
-
-    input::placeholder {
-      color: #94a3b8;
-    }
-
-    #strength-text {
-      font-weight: 600;
-    }
-
-    #strength {
-      margin-bottom: 0.5rem;
-    }
-
-    #feedback {
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-    }
-
-    ul.requirements {
-      list-style: none;
-      padding-left: 0;
-      margin-bottom: 1rem;
-    }
-
-    ul.requirements li {
-      font-size: 0.9rem;
-      padding: 0.2rem 0;
-    }
-
-    .valid {
-      color: #22c55e;
-    }
-
-    .invalid {
-      color: #ef4444;
-    }
-
-    .easter-egg {
-      font-style: italic;
-      color: #f87171;
-      margin-top: 0.5rem;
-      min-height: 1.2rem;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="card">
     <h1>🔒 Password Strength Checker</h1>
+
     <label for="password">Enter your password:</label>
-    <input type="password" id="password" placeholder="Type something strong..." />
+    <div class="password-wrapper">
+      <input type="password" id="password" placeholder="Type something strong..." />
+      <button id="toggle-password" title="Show/hide password">👁️</button>
+    </div>
+
+    <div id="strength-bar">
+      <div id="bar-fill"></div>
+    </div>
 
     <div id="strength">Strength: <span id="strength-text">—</span></div>
     <div id="feedback"></div>
 
     <ul class="requirements">
-      <li class="invalid" id="req-length">At least 8 characters</li>
-      <li class="invalid" id="req-upper">Uppercase letter</li>
-      <li class="invalid" id="req-lower">Lowercase letter</li>
-      <li class="invalid" id="req-number">Number</li>
-      <li class="invalid" id="req-symbol">Symbol</li>
+      <li class="invalid" id="req-length" title="Must be at least 8 characters">At least 8 characters</li>
+      <li class="invalid" id="req-upper" title="Include at least one uppercase letter">Uppercase letter</li>
+      <li class="invalid" id="req-lower" title="Include at least one lowercase letter">Lowercase letter</li>
+      <li class="invalid" id="req-number" title="Include at least one digit">Number</li>
+      <li class="invalid" id="req-symbol" title="Include at least one special character">Symbol</li>
     </ul>
 
     <div id="easter-egg" class="easter-egg"></div>
+
+    <button id="copy-btn">📋 Copy Password</button>
   </div>
 
   <script src="script.js"></script>
