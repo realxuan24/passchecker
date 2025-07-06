@@ -130,10 +130,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeSwitch = document.getElementById("theme-switch");
   const music = document.getElementById("bg-music");
 
-  // Volume control
+  // Set initial volume
   if (music) {
     music.volume = 0.5;
   }
+
+  // Start music after first user interaction (bypasses autoplay block)
+  document.addEventListener("click", () => {
+    if (music && music.paused) {
+      music.play().catch(err => {
+        console.warn("Autoplay blocked:", err);
+      });
+    }
+  }, { once: true });
 
   passwordInput.addEventListener("input", function () {
     checkPasswordStrength(this.value);
@@ -161,11 +170,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("light-theme");
     localStorage.setItem("theme", themeSwitch.checked ? "light" : "dark");
   });
-
-  // Ensure music plays after user interaction (for browsers that block autoplay)
-  document.addEventListener("click", () => {
-    if (music && music.paused) {
-      music.play().catch(() => {});
-    }
-  }, { once: true });
 });
