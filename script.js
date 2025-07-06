@@ -66,7 +66,7 @@ function checkEasterEggs(password) {
   return "";
 }
 
-  function checkPasswordStrength(password) {
+function checkPasswordStrength(password) {
   let strength = 0;
   const feedback = [];
 
@@ -91,46 +91,48 @@ function checkEasterEggs(password) {
   if (symbolValid) strength++;
   else feedback.push("Add symbols");
 
-  // Strength label + color
-  let strengthLabel = '';
-  let color = '';
+  const strengthText = document.getElementById("strength-text");
+  const barFill = document.getElementById("bar-fill");
+  const feedbackBox = document.getElementById("feedback");
 
-  if (strength <= 1) {
-    strengthLabel = 'Very Weak';
-    color = 'red';
-  } else if (strength === 2) {
-    strengthLabel = 'Weak';
-    color = 'orangered';
-  } else if (strength === 3) {
-    strengthLabel = 'Moderate';
-    color = 'orange';
-  } else if (strength === 4) {
-    strengthLabel = 'Strong';
-    color = 'blue';
-  } else {
-    strengthLabel = 'Very Strong';
-    color = 'limegreen';
-  }
+  const barWidths = ["10%", "25%", "50%", "75%", "100%"];
+  const strengthLabels = ["Very Weak", "Weak", "Moderate", "Strong", "Very Strong"];
+  const strengthColors = ["red", "orangered", "orange", "blue", "limegreen"];
 
-  // DOM updates
-  document.getElementById("strength-text").textContent = strengthLabel;
-  document.getElementById("strength-text").style.color = color;
-  document.getElementById("feedback").textContent = feedback.join(', ');
+  strengthText.textContent = strengthLabels[strength - 1] || "Very Weak";
+  strengthText.style.color = strengthColors[strength - 1] || "red";
+  barFill.style.width = barWidths[strength - 1] || "10%";
+  barFill.style.backgroundColor = strengthColors[strength - 1] || "red";
 
-  // Update requirement list visually
+  feedbackBox.textContent = feedback.join(", ");
+
   document.getElementById("req-length").className = lengthValid ? "valid" : "invalid";
   document.getElementById("req-upper").className = upperValid ? "valid" : "invalid";
   document.getElementById("req-lower").className = lowerValid ? "valid" : "invalid";
   document.getElementById("req-number").className = numberValid ? "valid" : "invalid";
   document.getElementById("req-symbol").className = symbolValid ? "valid" : "invalid";
 
-  // Easter egg message
-  const easterEggMessage = checkEasterEggs(password);
-  document.getElementById("easter-egg").textContent = easterEggMessage;
+  document.getElementById("easter-egg").textContent = checkEasterEggs(password);
 }
 
-// Hook into the input
+// Password input listener
 document.getElementById("password").addEventListener("input", function () {
   checkPasswordStrength(this.value);
 });
 
+// Toggle visibility
+document.getElementById("toggle-password").addEventListener("click", function () {
+  const input = document.getElementById("password");
+  const type = input.type === "password" ? "text" : "password";
+  input.type = type;
+  this.textContent = type === "password" ? "👁️" : "🙈";
+});
+
+// Copy password
+document.getElementById("copy-btn").addEventListener("click", function () {
+  const input = document.getElementById("password");
+  if (!input.value) return alert("Nothing to copy!");
+  navigator.clipboard.writeText(input.value).then(() => {
+    alert("Password copied to clipboard!");
+  });
+});
