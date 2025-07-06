@@ -1,4 +1,3 @@
-/* RESET + BASE STYLES */
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +15,6 @@ body {
   color: #f1f5f9;
 }
 
-/* CARD CONTAINER */
 .card {
   background: #1e293b;
   padding: 2rem;
@@ -26,7 +24,6 @@ body {
   max-width: 400px;
 }
 
-/* HEADERS + LABEL */
 h1 {
   text-align: center;
   margin-bottom: 1rem;
@@ -40,7 +37,6 @@ label {
   margin-bottom: 0.5rem;
 }
 
-/* INPUT + TOGGLE */
 .password-wrapper {
   position: relative;
 }
@@ -72,7 +68,6 @@ input::placeholder {
   font-size: 1.1rem;
 }
 
-/* STRENGTH BAR */
 #strength-bar {
   height: 6px;
   width: 100%;
@@ -89,7 +84,6 @@ input::placeholder {
   transition: width 0.3s;
 }
 
-/* STRENGTH TEXT + FEEDBACK */
 #strength-text {
   font-weight: 600;
 }
@@ -104,7 +98,6 @@ input::placeholder {
   color: #cbd5e1;
 }
 
-/* REQUIREMENTS */
 ul.requirements {
   list-style: none;
   padding-left: 0;
@@ -124,7 +117,6 @@ ul.requirements {
   color: #ef4444;
 }
 
-/* EASTER EGG */
 .easter-egg {
   font-style: italic;
   color: #f87171;
@@ -132,7 +124,6 @@ ul.requirements {
   min-height: 1.2rem;
 }
 
-/* COPY BUTTON */
 #copy-btn {
   background-color: #3b82f6;
   color: white;
